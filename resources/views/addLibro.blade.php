@@ -1,5 +1,5 @@
 <h3>Añadir Libro</h3>
-<form action="{{route('addLibro')}}" method="POST">
+<form action="{{ route('libros.store') }}" method="POST">
     @csrf
     <label for="titulo">Titulo</label>
     <input type="text" name="titulo">

@@ -9,7 +9,7 @@ class Libro extends Model
 {
     use HasFactory;
     protected $table = 'libros';
-    protected $fillable = ['titulo', 'autor'];
+    protected $fillable = ['titulo', 'autor', 'fecha_publicacion', 'disponible'];
 
 
     public static function getAll(){
@@ -35,7 +35,7 @@ class Libro extends Model
 
 
 
-    public static function updateLibro($titulo, $autor, $fecha_publicacion){
+    public static function updateLibro($id, $titulo, $autor, $fecha_publicacion){
         $libro = Libro::find($id);
         if( isset($libro) ){
             $libro->titulo = $titulo;
@@ -54,6 +54,14 @@ class Libro extends Model
             return  "Ok";
         }
         return  "Libro no encontrado";
+    }
+
+    public static function reservar($id){
+        Libro::where('id', $id)->update(['disponible' => false]);
+    }
+
+    public static function devolver($id){
+        Libro::where('id', $id)->update(['disponible' => true]);
     }
 
 }

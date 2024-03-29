@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
@@ -46,7 +47,7 @@ class Prestamo extends Model
 
 
 
-    public static function updatePrestamo($user, $book_id , $fecha_prestamo , $fecha_devolucion ){
+    public static function updatePrestamo($id, $user, $book_id , $fecha_prestamo , $fecha_devolucion ){
         $prestamo = Prestamo::find($id);
         if( isset($prestamo) ){
             $prestamo->user  = $user;
@@ -66,6 +67,10 @@ class Prestamo extends Model
             return  "Ok";
         }
         return  "Prestamo no encontrado";
+    }
+
+    public static function devolver($id){
+        Prestamo::where('id', $id)->update(['fecha_devolucion' => new DateTime()]);
     }
 
 
