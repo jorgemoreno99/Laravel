@@ -9,8 +9,10 @@ class Controller
 {
 
 
+
+
     public function home(){
-        return 'home';
+        return view('welcome');
     }
 
     public function mostrarFormularioAddLibro(){

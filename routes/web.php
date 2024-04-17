@@ -7,11 +7,8 @@ use App\Http\Controllers\PrestamoControllerAPI;
 
 
 
-// Route::get('/addLibro', [LibroCrudController::class, 'mostrarFormularioAdd']);
-// Route::post('/addLibroPost', [LibroCrudController::class, 'addLibro'])->name('addLibro');
+Route::get('/', [Controller::class, 'home']);
 
-// Route::get('/addPrestamo', [LibroCrudController::class, 'mostrarFormularioPrestamoAdd']);
-// Route::post('/addPrestamoPost', [LibroCrudController::class, 'addPrestamoPost'])->name('addPrestamoPost');
 
 
 // Rutas para el controlador de libros
@@ -25,3 +22,13 @@ Route::put('/libros/{id}', [Controller::class, 'actualizarLibro'])->name('actual
 Route::get('/newPrestamo', [Controller::class, 'mostrarFormularioAddPrestamo'])->name('mostrarFormularioAddPrestamo');
 Route::get('/prestamos', [Controller::class, 'showAllPrestamos'])->name('showAllPrestamos');
 Route::get('/prestamos/{id}', [Controller::class, 'mostrarDetallesPrestamo'])->name('mostrarDetallesPrestamo');
+
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+])->group(function () {
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    })->name('dashboard');
+});
